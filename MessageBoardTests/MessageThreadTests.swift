@@ -23,6 +23,35 @@ class MessageThreadTests: XCTestCase {
         }
     }
     
+    func testCreateMessage() {
+        messageThreadController.createMessageThread(with: "Test One") {
+            let messageThreads = self.messageThreadController.messageThreads
+            
+            guard let messageThread = messageThreads.first else { return }
+            
+            self.messageThreadController.createMessage(in: messageThread, withText: "Title Test", sender: "Tyler") {
+                let message = messageThread.messages
+                XCTAssertGreaterThan(message.count, 0)
+            }
+        }
+    }
     
+    func testFetchMessage() {
+        messageThreadController.createMessageThread(with: "Test one") {
+            let messageThreads = self.messageThreadController.messageThreads
+            
+            guard let messageThread = messageThreads.first else { return }
+            
+            self.messageThreadController.createMessage(in: messageThread, withText: "Title test", sender: "Tyler") {
+                let message = messageThread.messages
+                XCTAssertGreaterThan(message.count, 0)
+            }
+        }
+        
+        messageThreadController.fetchMessageThreads {
+            let messageThreads = self.messageThreadController.messageThreads
+            XCTAssertGreaterThan(messageThreads.count, 0)
+        }
+    }
     
 }

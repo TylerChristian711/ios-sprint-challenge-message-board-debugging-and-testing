@@ -23,4 +23,44 @@ class Message_BoardUITests: XCTestCase {
         app.launch()
     }
     
+    func testTableViewThreadCreated() {
+        let text = app.textFields["MessageTableViewControllerTextField"]
+        text.tap()
+        text.typeText("Testing")
+        app.keyboards.buttons["Return"].tap()
+        
+        let tableRow = app.tables.staticTexts["Testing"]
+        XCTAssertTrue(tableRow.exists)
+    }
+    
+    func testCreatingANewMessage() {
+        let messageTextField = app.textFields["MessageTableViewControllerTextField"]
+        messageTextField.tap()
+        messageTextField.typeText("Testing")
+        app.keyboards.buttons["Return"].tap()
+        
+        let tableRow = app.tables.staticTexts["Testing"]
+        XCTAssertTrue(tableRow.exists)
+        
+        tableRow.tap()
+        XCTAssert(app.navigationBars["Testing"].exists)
+        
+        app.navigationBars["Testing"].buttons["Add"].tap()
+        XCTAssert(app.navigationBars["New Message"].exists)
+        
+        let messageDetialTextField = app.textFields["DetialTextField"]
+        XCTAssert(messageDetialTextField.exists)
+        
+        let messageDetailTextView = app.textViews["DetialTextView"]
+        XCTAssert(messageDetailTextView.exists)
+        
+        let buttonSend = app.navigationBars["New Message"].buttons["Send"]
+        XCTAssert(buttonSend.exists)
+        
+        buttonSend.tap()
+        
+    }
+    
+    
+    
 }

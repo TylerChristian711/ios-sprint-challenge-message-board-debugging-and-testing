@@ -1,2 +1,6 @@
-1st bug cannot create thread
+1st bug: cannot create thread - fixed
+
+2nd bug: Error message of "Error decoding message threads from JSON data: valueNotFound(Swift.Dictionary<Swift.String, Message_Board.MessageThread>, Swift.DecodingError.Context(codingPath: [], debugDescription: "The given data did not contain a top-level value.", underlyingError: nil))"
+
+3rd bug(UI): sending message dose not work - fixed 
 
